@@ -15,7 +15,6 @@ import cv2
 ##########################           PART ONE            ##########################
 
 
-
 nfle10 = pd.read_csv("nfle10.csv")
 dataSize=nfle10.shape[0]
 #dataSize = 5
