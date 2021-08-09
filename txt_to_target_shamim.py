@@ -10,7 +10,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 ##########################           PART ONE            ##########################
-
+#import os
+#os.chdir('annotations/')
 
 ver = 10
 nfle = pd.read_csv("nfle"+str(ver)+".csv")

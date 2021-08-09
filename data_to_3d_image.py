@@ -2,10 +2,10 @@ import numpy as np
 import pandas as pd
 
 df = pd.read_csv('nfle10_more_sensor_values.csv')
-df = df.iloc[230400:,:] # 900s * 256 frame
+df = df.iloc[230400:7534080,:] # 930s * 256 frame
 df = df.reset_index(drop=True)
 print(df.head(5))
-print()
+print(df.shape)
 
 # roc_loc = df['ROC-LOC'].values
 # fp2_f4 = df['FP2-F4'].values
@@ -22,6 +22,6 @@ print()
 ch = {} # empty dict
 for i in df.columns:
     ch[i] = df[i].values
-    ch[i] = np.reshape(ch[i], (952,7680))
+    ch[i] = np.reshape(ch[i], (951,7680))
 
 arr = np.stack((i for i in ch.values()),axis=1)
