@@ -2,8 +2,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-version = 10
-df = pd.read_csv('clean_nfle10.csv')
+version = 36 
+
+df = pd.read_csv('annotations/clean_nfle'+str(version)+'.csv')
 df = df['Sleep Stage']
 
 ## if i wanna view the annotations 
@@ -14,9 +15,9 @@ df = df['Sleep Stage']
 ## for plotting bar graphs 
 data = df.value_counts()
 y = [j for i,j in data.items()]
-plt.barh(list(data.keys()), y)
+plt.bar(list(data.keys()), y)
 for i,j in enumerate(y):
-    plt.text(j,i,str(str('{:.2f}'.format(j*30/3600))+ ' hrs')) 
+    plt.text(i,j,str(str('{:.2f}'.format(j*30/3600))+ ' hrs'), va='bottom') 
 plt.savefig('annotations/nfle{} bar graph'.format(version))
 
 
@@ -33,10 +34,14 @@ plt.style.use('ggplot')
 plt.figure(figsize=(10.24,5.78))
 
 ax =plt.plot(x,hypno_df)
+
+
+
 # plt.yticks(hypno_df,yy)
 # ax.set(yticks=yy)
 plt.title('Hypnogram for nfle{}'.format(version))
 plt.xlabel('Time(hrs)')
 plt.ylabel('Sleep Stage')
+plt.yticks(list(range(1,7)),labels=yy)
 plt.savefig('annotations/nfle{} hypnogram'.format(version))
 plt.show()

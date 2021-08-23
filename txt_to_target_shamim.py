@@ -10,10 +10,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 ##########################           PART ONE            ##########################
-#import os
-#os.chdir('annotations/')
+import os
+os.chdir('annotations/') 
+import argparse
 
-ver = 10
+ap = argparse.ArgumentParser()
+ap.add_argument('-v', '--version', required=True, help='version means nfle(10).. so 10 it is')
+args = vars(ap.parse_args())
+
+ver = args['version']
 nfle = pd.read_csv("nfle"+str(ver)+".csv")
 dataSize = nfle.shape[0]
 nfle.head()
@@ -28,7 +33,7 @@ problemdf = df.loc[df["Duration[s]"]!=30]
 
 
 df["timestamp"]=0
-df["DurationCalc"]=0
+# df["DurationCalc"]=0
 
 #nfle.columns
 #h,m,s = map(int, df['Time [hh:mm:ss]'][0].split(':'))
@@ -39,12 +44,12 @@ for i in range(dataSize):
 	h,m,s = map(int, df['Time [hh:mm:ss]'][i].split(':'))
 	if h<20:
 		h+=24
-	df["timestamp"][i] = h*3600+m*60+s
-	df["DurationCalc"][i] = dur
+	df.loc[i,"timestamp"] = h*3600+m*60+s
+	# df["DurationCalc"][i] = dur
 	if(i==0):
 		continue
 	dur = df["timestamp"][i] - df["timestamp"][i-1]
-	if (dur>30):
+	if (dur>30):		
 		for j in range(30,dur,30):
 			k=df.shape[0]
 			df.loc[k] = df.iloc[i]
@@ -55,13 +60,13 @@ for i in range(dataSize):
 			mm = tt%60
 			hh = (tt//60)%24
 			df.loc[k,'Time [hh:mm:ss]'] = str(hh)+':'+str(mm)+':'+str(ss)
-			df.loc[k,'DurationCalc'] = dur
-	df["DurationCalc"][i] = dur
+			# df.loc[k,'DurationCalc'] = dur
+	# df["DurationCalc"][i] = dur
 df = df.sort_values(by=['timestamp']).reset_index(drop=True)
 df.timestamp-=df["timestamp"][0]
 
-problemdf = df.loc[df["DurationCalc"]!=30]
-df = df.drop(['DurationCalc'], axis=1)
+# problemdf = df.loc[df["DurationCalc"]!=30]
+# df = df.drop(['DurationCalc'], axis=1)
 df.to_csv("clean_nfle"+str(ver)+".csv",index=False)
 
 problemdf.head()

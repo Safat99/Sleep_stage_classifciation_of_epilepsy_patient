@@ -15,11 +15,16 @@ import cv2
 ##########################           PART ONE            ##########################
 
 
-nfle10 = pd.read_csv("nfle10.csv")
+# nfle10 = pd.read_csv("nfle10.csv")
+nfle10 = pd.read_csv('clean_nfle10.csv')
+nfle10 = nfle10[['Sleep Stage']]
 dataSize=nfle10.shape[0]
 #dataSize = 5
-repeat = 256
-main_df = pd.DataFrame(columns=["Sleep_Stage"],index=range(nfle10.iloc[dataSize-1,6]))
+# repeat = 256
+# main_df = pd.DataFrame(columns=["Sleep_Stage"],index=range(nfle10.iloc[dataSize-1,6]))
+
+
+main_df = pd.DataFrame(columns=['Sleep_Stage'],index=range(951*7680))
 
 for i in range(dataSize):
 	sleep_stage=nfle10.iloc[i,0]

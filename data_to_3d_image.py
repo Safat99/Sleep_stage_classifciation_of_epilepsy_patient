@@ -24,4 +24,4 @@ for i in df.columns:
     ch[i] = df[i].values
     ch[i] = np.reshape(ch[i], (951,7680))
 
-arr = np.stack((i for i in ch.values()),axis=1)
+arr = np.stack([i for i in ch.values()],axis=1)
