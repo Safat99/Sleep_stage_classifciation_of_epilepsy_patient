@@ -1,8 +1,15 @@
 import matplotlib.pyplot as plt 
 import pandas as pd
 import numpy as np
+import argparse
 
-version = 36 
+ap = argparse.ArgumentParser()
+ap.add_argument('-v', '--version', required=True, help='version means nfle(10).. so 10 it is')
+args = vars(ap.parse_args())
+
+
+
+version = args['version']
 
 df = pd.read_csv('annotations/clean_nfle'+str(version)+'.csv')
 df = df['Sleep Stage']
