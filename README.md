@@ -54,6 +54,14 @@ The hypnograms show each subject's sleep stages across approximately eight hours
 
 ![Difference between normal and NFLE sleep-stage frequencies](./assets/group_comparisons/png/average_difference_5_nfle_normal.png)
 
+### Model training outputs
+
+These plots show training and validation accuracy and loss for the nine-subject experiment. The training accuracy continues to improve while validation accuracy levels off, and validation loss begins to rise later in training. This suggests the model may be overfitting; these plots are not a held-out test evaluation.
+
+| Accuracy | Loss |
+|---|---|
+| ![Nine-subject training and validation accuracy](./assets/model_training/nine_subjects_accuracy.png) | ![Nine-subject training and validation loss](./assets/model_training/nine_subjects_loss.png) |
+
 The preprocessing unit in the paper is a 30-second sleep epoch:
 
 ```text
@@ -106,6 +114,7 @@ The reported result in the paper is **60.46% accuracy for 15 NFLE subjects**. Th
 - `assets/hypnograms/`: per-subject sleep-stage timeline images
 - `assets/bar_graphs/`: per-subject stage-duration images
 - `assets/group_comparisons/`: normal versus NFLE comparison PDFs
+- `assets/model_training/`: training and validation curves for the nine-subject experiment
 - `assets/flow_diagrams/`: project system diagram
 - `assets/raw_signals/`: raw EDF signal plots
 - `docs/demographics/`: subject gender and age PDF
@@ -131,11 +140,11 @@ The repository contains preprocessing experiments and visual artifacts, but it i
 
 - The Conv1D architecture and hyperparameters above are documented in the paper but are not fully implemented in the current model script.
 - `src/models/lstm_model_for_nfle10.py` is a prototype LSTM, not the paper's four-block Conv1D classifier.
-- No trained model weights or complete 15-subject evaluation results are stored in the repository.
+- Training and validation curves are available for a nine-subject experiment, but no trained model weights or held-out test results are stored in the repository.
 - Several scripts use hard-coded paths and intermediate filenames.
 - There is no dependency lock file or centralized configuration file.
 
-Do not interpret the paper's 60.46% result as a verified result of the current LSTM prototype.
+Do not interpret the paper's 60.46% result as a verified result of the current LSTM prototype or the nine-subject training curves.
 
 ## Reproduce the visualizations
 
