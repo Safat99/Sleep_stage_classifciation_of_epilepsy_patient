@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import argparse
+from pathlib import Path
 
 ap = argparse.ArgumentParser()
 ap.add_argument('-v', '--version', required=True, help='version means nfle(10).. so 10 it is')
@@ -10,6 +11,8 @@ args = vars(ap.parse_args())
 
 
 version = args['version']
+Path('assets/bar_graphs').mkdir(parents=True, exist_ok=True)
+Path('assets/hypnograms').mkdir(parents=True, exist_ok=True)
 
 df = pd.read_csv('annotations/clean_nfle'+str(version)+'.csv')
 df = df['Sleep Stage']
@@ -25,7 +28,7 @@ y = [j for i,j in data.items()]
 plt.bar(list(data.keys()), y)
 for i,j in enumerate(y):
     plt.text(i,j,str(str('{:.2f}'.format(j*30/3600))+ ' hrs'), va='bottom') 
-plt.savefig('annotations/nfle{} bar graph'.format(version))
+plt.savefig('assets/bar_graphs/nfle{}_bar_graph.png'.format(version), bbox_inches='tight')
 
 
 
@@ -50,5 +53,5 @@ plt.title('Hypnogram for nfle{}'.format(version))
 plt.xlabel('Time(hrs)')
 plt.ylabel('Sleep Stage')
 plt.yticks(list(range(1,7)),labels=yy)
-plt.savefig('annotations/nfle{} hypnogram'.format(version))
+plt.savefig('assets/hypnograms/nfle{}_hypnogram.png'.format(version), bbox_inches='tight')
 plt.show()

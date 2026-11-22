@@ -1,6 +1,9 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+from pathlib import Path
+
+Path('assets/group_comparisons').mkdir(parents=True, exist_ok=True)
 
 ver1,ver2,ver3,ver4,ver5 = list(input('Input 5 NFLE patients:\n').split())
 # ver1,ver2,ver3,ver4,ver5 = str(39),str(18),str(7),str(21),str(28)
@@ -59,7 +62,8 @@ plt.xlabel('Sleep Stages')
 # plt.ylabel('Number of 30 seconds epochs')
 plt.ylabel('Number of sleeping hours (hrs)')
 plt.legend()
-plt.savefig('annotations/Average Differences of 8 hours Sleep Stages between 5 NFLE and Normal peoples.pdf')
+plt.savefig('assets/group_comparisons/average_difference_5_nfle_normal.pdf',
+            bbox_inches='tight')
 plt.show()
 
 ##output

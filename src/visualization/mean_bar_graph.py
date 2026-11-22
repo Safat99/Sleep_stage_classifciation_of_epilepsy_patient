@@ -2,6 +2,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import argparse
+from pathlib import Path
 
 ap = argparse.ArgumentParser()
 ap.add_argument('-v1', '--version1', required=True, help='version means nfle(10).. so 10 it is')
@@ -10,6 +11,7 @@ ap.add_argument('-v3', '--version3', required=True, help='version means nfle(10)
 ap.add_argument('-v4', '--version4', required=True, help='version means nfle(10).. so 10 it is')
 ap.add_argument('-v5', '--version5', required=True, help='version means nfle(10).. so 10 it is')
 args = vars(ap.parse_args())
+Path('assets/group_comparisons').mkdir(parents=True, exist_ok=True)
 
 version1=args['version1']
 version2=args['version2']
@@ -40,5 +42,5 @@ plt.bar(list(data.keys()),y)
 for i,j in enumerate(y):
     plt.text(i,j,str(str('{:.2f}'.format(j*30/3600))+ ' hrs'), va='bottom') 
 plt.title('Average Sleep Stages for 5 NFLE people')
-plt.savefig('annotations/Average Sleep Stages for 5 NFLE people.pdf')
+plt.savefig('assets/group_comparisons/average_sleep_stages_5_nfle.pdf', bbox_inches='tight')
 plt.show()
