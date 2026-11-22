@@ -22,41 +22,37 @@ Raw EDF files are not all included in this repository. Download the required rec
 
 ## Important project figures
 
-| Asset | Description |
+### Project flow diagram
+
+![Deep CNN sleep-stage classification system diagram](./assets/flow_diagrams/flow_diagram.jpeg)
+
+### Raw EDF signal
+
+![Raw EEG signal for NFLE10](./assets/raw_signals/nfle10_edf_raw.png)
+
+*The raw EEG signal visualization used during exploratory analysis.*
+
+### Subject sleep-stage results
+
+| NFLE10 | NFLE23 |
 |---|---|
-| [System flow diagram](./assets/flow_diagrams/flow_diagram.jpeg) | Overview of EDF loading, filtering, resampling, dataset construction, CNN training, evaluation, and prediction |
-| [NFLE10 raw EDF signal](./assets/raw_signals/nfle10_edf_raw.png) | Raw EEG signal visualization used during exploratory analysis |
-| [NFLE10 hypnogram](./assets/hypnograms/nfle10_hypnogram.png) | Eight-hour sleep-stage timeline for NFLE10 |
-| [NFLE10 stage bar graph](./assets/bar_graphs/nfle10_bar_graph.png) | Stage-duration distribution for NFLE10 |
-| [NFLE23 hypnogram](./assets/hypnograms/nfle23_hypnogram.png) | Sleep-stage timeline for NFLE23 |
-| [NFLE23 stage bar graph](./assets/bar_graphs/nfle23_bar_graph.png) | Stage-duration distribution for NFLE23 |
-| [NFLE4 hypnogram](./assets/hypnograms/nfle4_hypnogram.png) | Sleep-stage timeline for NFLE4 |
-| [NFLE4 stage bar graph](./assets/bar_graphs/nfle4_bar_graph.png) | Stage-duration distribution for NFLE4 |
-| [NFLE36 hypnogram](./assets/hypnograms/nfle36_hypnogram.png) | Sleep-stage timeline for NFLE36 |
-| [NFLE36 stage bar graph](./assets/bar_graphs/nfle36_bar_graph.png) | Stage-duration distribution for NFLE36 |
-| [5-NFLE average](./assets/group_comparisons/average_sleep_stages_5_nfle.pdf) | Average sleep-stage distribution across five NFLE subjects |
-| [5-normal average](./assets/group_comparisons/average_sleep_stages_5_normal.pdf) | Average sleep-stage distribution across five normal subjects |
-| [NFLE vs. normal comparison](./assets/group_comparisons/average_difference_5_nfle_normal.pdf) | Eight-hour stage-frequency difference between NFLE and normal subjects |
+| ![NFLE10 hypnogram](./assets/hypnograms/nfle10_hypnogram.png) | ![NFLE23 hypnogram](./assets/hypnograms/nfle23_hypnogram.png) |
+| ![NFLE10 stage bar graph](./assets/bar_graphs/nfle10_bar_graph.png) | ![NFLE23 stage bar graph](./assets/bar_graphs/nfle23_bar_graph.png) |
 
-## Research workflow
+| NFLE4 | NFLE36 |
+|---|---|
+| ![NFLE4 hypnogram](./assets/hypnograms/nfle4_hypnogram.png) | ![NFLE36 hypnogram](./assets/hypnograms/nfle36_hypnogram.png) |
+| ![NFLE4 stage bar graph](./assets/bar_graphs/nfle4_bar_graph.png) | ![NFLE36 stage bar graph](./assets/bar_graphs/nfle36_bar_graph.png) |
 
-```mermaid
-flowchart LR
-    A[CAP Sleep Database] --> B[EDF recordings]
-    A --> C[R&K annotation text]
-    B --> D[Select 6 EEG channels]
-    D --> E[Band-pass filter 0.3-30 Hz]
-    E --> F[Resample to 256 Hz]
-    C --> G[Normalize 30-second epochs]
-    F --> H[EDF to 7680-sample CSV windows]
-    G --> I[Align stage labels]
-    H --> J[Deep CNN dataset]
-    I --> J
-    J --> K[Train Conv1D model]
-    K --> L[Evaluate accuracy/loss]
-    L --> M[Keep best model]
-    M --> N[Generate hypnogram/predictions]
-```
+The hypnograms show each subject's sleep stages across approximately eight hours. The bar graphs show the distribution of those stages.
+
+### NFLE and normal-subject comparisons
+
+| Five-NFLE average | Five-normal average |
+|---|---|
+| ![Average sleep stages across five NFLE subjects](./assets/group_comparisons/png/average_sleep_stages_5_nfle.png) | ![Average sleep stages across five normal subjects](./assets/group_comparisons/png/average_sleep_stages_5_normal.png) |
+
+![Difference between normal and NFLE sleep-stage frequencies](./assets/group_comparisons/png/average_difference_5_nfle_normal.png)
 
 The preprocessing unit in the paper is a 30-second sleep epoch:
 
